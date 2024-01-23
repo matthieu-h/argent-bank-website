@@ -16,7 +16,10 @@ const UserEdit = () => {
     <div>
       <Header navlinkTo={home} connexion="Sign out" onclick={logout} />
       <div className="main bg-dark">
-        <UserNameEdit />
+        <div className="edit-user">
+          <UserNameEdit />
+        </div>
+
         <h2 className="sr-only">Accounts</h2>
         <Account
           title="Argent Bank Checking (x8349)"

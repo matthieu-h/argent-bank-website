@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setUserName } from "../profileSlice";
+import { NavLink, Navigate } from "react-router-dom";
+import { user } from "../routes";
 
 const UserNameEdit = () => {
   const dispatch = useDispatch();
@@ -41,15 +43,10 @@ const UserNameEdit = () => {
     });
   };
 
-  const cancel = (e) => {
-    e.preventDefault();
-    console.log("cancel");
-  };
-
   return (
     <div className="header">
       <h1>Edit user info</h1>
-      <form className=".login-form" onSubmit={onSubmit}>
+      <form className="login-form" onSubmit={onSubmit}>
         <div className="input-wrapper">
           <label htmlFor="username">Username</label>
           <input
@@ -80,10 +77,12 @@ const UserNameEdit = () => {
             defaultValue={lastName}
           />
         </div>
-        <button className="edit-button">Save</button>
-        <button className="edit-button" onClick={cancel}>
-          Cancel
-        </button>
+        <div className="button">
+          <button className="edit-button">Save</button>
+          <NavLink to={user}>
+            <button className="edit-button">Cancel</button>
+          </NavLink>
+        </div>
       </form>
     </div>
   );
