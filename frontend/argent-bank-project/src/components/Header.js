@@ -2,7 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { home, signIn } from "../routes";
 
-const Header = ({ connexion, onclick }) => {
+const Header = ({ connexion, onclick, navlinkTo }) => {
   return (
     <div>
       <nav className="main-nav">
@@ -15,10 +15,10 @@ const Header = ({ connexion, onclick }) => {
           <h1 className="sr-only">Argent Bank</h1>
         </NavLink>
         <div>
-          <NavLink to={signIn} className="main-nav-item" onClick={onclick}>
+          <NavLink to={navlinkTo} className="main-nav-item" onClick={onclick}>
             <i className="fa fa-user-circle"></i>
             {connexion}
-          </NavLink>
+          </NavLink>{" "}
         </div>
       </nav>
     </div>

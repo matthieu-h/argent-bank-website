@@ -3,14 +3,14 @@ import Account from "../components/Account";
 import Header from "../components/Header";
 import { useDispatch } from "react-redux";
 import { unSetToken } from "../slice";
-import { useNavigate, useParams } from "react-router-dom";
-import { signIn } from "../../src/routes";
+import { useParams } from "react-router-dom";
+
 import UserName from "../components/UserName";
 import { useSelector } from "react-redux";
+import { home } from "../routes";
 
 const User = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const firstName = useSelector((state) => state.firstName.firstName);
   const lastName = useSelector((state) => state.lastName.lastName);
@@ -23,12 +23,11 @@ const User = () => {
 
   const logout = (e) => {
     dispatch(unSetToken());
-    navigate(signIn);
   };
 
   return (
     <div>
-      <Header connexion="Sign out" onclick={logout} />
+      <Header navlinkTo={home} connexion="Sign out" onclick={logout} />
       <div className="main bg-dark">
         <UserName firstName={firstName} lastName={lastName} />
         <h2 className="sr-only">Accounts</h2>

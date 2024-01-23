@@ -8,9 +8,8 @@ import {
   setUserName,
   setUserId,
 } from "../profileSlice";
-import { useSelector } from "react-redux";
 
-// import { user } from "../routes";
+import { user } from "../routes";
 
 export function SignInForm() {
   const [email, setEmail] = useState("");
@@ -18,13 +17,10 @@ export function SignInForm() {
   const [message, setMessage] = useState("hidden");
   const loginObject = { email: email, password: password };
   const loginString = JSON.stringify(loginObject);
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const id = useSelector((state) => state.id.id);
-  console.log(id);
   const redirection = () => {
-    navigate(`/user/${id}`, { replace: true });
+    navigate(user);
   };
   const onSubmit = (e) => {
     e.preventDefault();

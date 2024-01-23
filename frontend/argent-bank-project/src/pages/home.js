@@ -1,12 +1,14 @@
 import React from "react";
+// import { Navigate } from "react-router-dom";
 import Banner from "../components/Banner";
 import FeaturesItem from "../components/FeaturesItem";
 import Header from "../components/Header";
+import { signIn } from "../routes";
 
 const Home = () => {
   return (
     <div>
-      <Header connexion="Sign in" />
+      <Header navlinkTo={signIn} connexion="Sign in" />
       <Banner />
       <div className="features">
         <h2 className="sr-only">Features</h2>

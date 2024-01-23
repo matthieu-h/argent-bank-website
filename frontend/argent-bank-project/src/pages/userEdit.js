@@ -2,20 +2,19 @@ import React from "react";
 import Header from "../components/Header";
 import { useDispatch } from "react-redux";
 import { unSetToken } from "../slice";
-import { Navigate } from "react-router-dom";
-import { signIn } from "../routes";
 import Account from "../components/Account";
 import UserNameEdit from "../components/UserNameEdit";
+import { home } from "../routes";
 
 const UserEdit = () => {
   const dispatch = useDispatch();
   const logout = (e) => {
     dispatch(unSetToken());
-    Navigate(signIn);
   };
+  console.log();
   return (
     <div>
-      <Header connexion="Sign out" onclick={logout} />
+      <Header navlinkTo={home} connexion="Sign out" onclick={logout} />
       <div className="main bg-dark">
         <UserNameEdit />
         <h2 className="sr-only">Accounts</h2>
