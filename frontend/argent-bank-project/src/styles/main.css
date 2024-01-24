@@ -274,7 +274,7 @@ body {
   flex-direction: column;
   align-items: center;
   margin-bottom: 1rem;
-  width: 100px;
+  margin-top: 1re;
 }
 
 .input-wrapper label {
