@@ -1,6 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { home, signIn } from "../routes";
+import { home } from "../routes";
 
 const Header = ({ connexion, onclick, navlinkTo }) => {
   return (
