@@ -3,7 +3,6 @@ import Account from "../components/Account";
 import Header from "../components/Header";
 import { useDispatch } from "react-redux";
 import { unSetToken } from "../slice";
-import { useParams } from "react-router-dom";
 
 import UserName from "../components/UserName";
 import { useSelector } from "react-redux";
@@ -14,12 +13,6 @@ const User = () => {
 
   const firstName = useSelector((state) => state.firstName.firstName);
   const lastName = useSelector((state) => state.lastName.lastName);
-
-  const id = useSelector((state) => state.id.id);
-  console.log(id);
-
-  let { userId } = useParams();
-  console.log(userId);
 
   const logout = (e) => {
     dispatch(unSetToken());

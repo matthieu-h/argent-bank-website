@@ -10,11 +10,9 @@ export const SignInFormSlice = createSlice({
   reducers: {
     setToken: (state, action) => {
       state.token = action.payload;
-      console.log(state.token);
     },
     unSetToken: (state) => {
       state.token = null;
-      console.log(state.token);
     },
   },
 });

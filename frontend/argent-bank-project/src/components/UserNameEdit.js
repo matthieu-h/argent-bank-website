@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { React, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setUserName } from "../profileSlice";
 import { NavLink } from "react-router-dom";
@@ -8,18 +8,14 @@ const UserNameEdit = () => {
   const dispatch = useDispatch();
 
   const userName = useSelector((state) => state.userName.userName);
-  console.log(userName);
   const firstName = useSelector((state) => state.firstName.firstName);
   const lastName = useSelector((state) => state.lastName.lastName);
   const tokenRed = useSelector((state) => state.tokener.token);
 
   const [userNameState, setUserNameState] = useState(userName);
-
   const saveUserName = (e) => {
     setUserNameState(e.target.value);
-    console.log(userNameState);
   };
-
   const userNameObject = { userName: userNameState };
 
   const onSubmit = (e) => {
@@ -35,9 +31,7 @@ const UserNameEdit = () => {
     }).then(function (response) {
       response.json().then((userObject) => {
         if (response.ok) {
-          console.log(userObject);
-        } else {
-          console.log("pas ok");
+          alert("User name successfully change !");
         }
       });
     });
