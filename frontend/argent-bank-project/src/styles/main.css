@@ -45,7 +45,7 @@ body {
 }
 .main-nav-user-sign{
   display:flex;
-  gap: 20px;
+  gap: 19px;
 }
 .main-nav a.router-link-exact-active {
   color: #42b983;
