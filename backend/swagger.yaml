@@ -102,129 +102,113 @@ paths:
         "500":
           description: Internal Server Error
 
-  # Chemin permettant de visualiser les comptes de l'utilisateur
-  /user/accounts:
+  # Chemin permettant de visualiser toutes les transactions pour le mois en cours, groupée par compte
+  /transactions:
     get:
       security:
         - Bearer: []
       tags:
-        - User Module
-      summary: User Accounts API
-      description: API for fetching user accounts
-      responses:
-        "200":
-          description: User accounts retrieved successfully
-          schema:
-            $ref: "#/definitions/UserAccounts"
-        "401":
-          description: Unauthorized
-        "500":
-          description: Internal Server Error
+        - Transactions Module
+      summary: Get all transactions for the current month, grouped by account
+      description: API for fetching a list of transactions for the current month, grouped by account
 
-  # Chemin permettant de visualiser les transaction d'un compte de l'utilisateur
-  /user/accounts/{accountID}/transactions:
-    get:
-      security:
-        - Bearer: []
-      tags:
-        - User Module
-      summary: API transactions of a user's account
-      description: API for fetching an account transaction list with its ID
       parameters:
-        - in: path
-          name: accountID
-          description: ID of the user's account
-          required: true
+        - name: Authorization
+          in: header
           type: string
+          description: Attach Bearer JWT token
+          required: true
+        - name: period
+          in: body
+          description: Current Month
+          required: true
+          schema:
+            $ref: "#/definitions/TransactionsPeriod"
       produces:
         - application/json
       responses:
         "200":
-          description: User account transactions retrieved successfully
+          description: Transactions for the current month retrieved successully
           schema:
-            $ref: "#/definitions/UserAccountTransactions"
+            $ref: "#/definitions/ListOfTransactions"
+        "400":
+          description: Period bad request
         "401":
-          description: Unauthorized
+          description: User not connected
+        "403":
+          description: Invalid Token
         "404":
-          description: Not Found
+          description: List of Transaction Not Found
         "500":
           description: Internal Server Error
 
     # Chemin permettant de visualiser les détails d'une transaction
-  /user/accounts/{accountID}/transactions/{transactionID}/details:
+
+  /transactions/{transactionID}:
     get:
       security:
         - Bearer: []
       tags:
-        - User Module
+        - Transactions Module
       summary: Details of a transaction
-      description: Api for fetching details of a transaction with its ID
+      description: Api for fetching details of a transaction with its Id
       parameters:
-        - name: accountID
-          in: path
-          required: true
-          description: ID of the user's account
-          type: string
         - name: transactionID
           in: path
           required: true
           description: ID of the transaction
           type: string
-        - in: body
-          name: body
-          description: Transaction Payload
-          required: true
-          schema:
-            $ref: "#/definitions/Details"
       produces:
         - application/json
       responses:
         "200":
-          description: User account transaction details retrieved successfully
+          description: Details of transaction retrieved successfully
+          schema:
+            $ref: "#/definitions/Transaction"
         "401":
-          description: Unauthorized
+          description: User not connected
+        "403":
+          description: Invalid Token
         "404":
-          description: Not Found
+          description: TransactionID Not Found
         "500":
           description: Internal Server Error
 
     # Chemin permettant d'ajouter des informations sur une transaction'
-  /user/accounts/{accountID}/transactions/{transactionID}/information:
-    post:
+
+  /transaction/{transactionID}/note:
+    patch:
       security:
         - Bearer: []
       tags:
-        - User Module
-      summary: Add information in a transaction
-      description: API for adding information in a transaction using transactionID
+        - Transactions Module
+      summary: Add a note on a transaction
+      description: Add a note to a transaction with its Id
       parameters:
-        - name: accountID
-          in: path
-          required: true
-          description: ID of the user's account
-          type: string
         - name: transactionID
           in: path
           required: true
           description: ID of the transaction
           type: string
-        - in: body
-          name: body
-          description: Information Payload
+        - name: note
+          in: body
           required: true
+          description: information additional
           schema:
-            $ref: "#/definitions/Information"
+            $ref: "#/definitions/TransactionNote"
       produces:
         - application/json
       responses:
-        "200":
-          description: User bank account transaction information add successfully
+        "201":
+          description: Note in transaction added successfully
         "400":
-          description: Bad request
+          description: Invalid Fields of note
         "401":
-          description: Unauthorized
+          description: User not connected
+        "403":
+          description: Invalid Token
         "404":
-          description: Not Found
+          description: TransactionID Not Found
         "500":
           description: Internal Server Error
 
@@ -233,37 +217,34 @@ paths:
       security:
         - Bearer: []
       tags:
-        - User Module
-      summary: Modify information in a transaction
-      description: API for modifying information in a transaction using transactionID
+        - Transactions Module
+      summary: Modify the note of a transaction
+      description: Modify a note in a transaction with its Id
       parameters:
-        - name: accountID
-          in: path
-          required: true
-          description: ID of the user's account
-          type: string
         - name: transactionID
           in: path
           required: true
           description: ID of the transaction
           type: string
         - in: body
-          name: body
-          description: Information Payload
+          name: note
+          description: Update note of a transaction
           required: true
           schema:
-            $ref: "#/definitions/Information"
+            $ref: "#/definitions/TransactionNote"
       produces:
         - application/json
       responses:
-        "200":
-          description: User bank account transaction information modifying successfully
+        "201":
+          description: Note successfully updated
         "400":
-          description: Bad request
+          description: Invalid Fields of note
         "401":
-          description: Unauthorized
+          description: User not connected
+        "403":
+          description: Invalid Token
         "404":
-          description: Not Found
+          description: TransactionID Not Found
         "500":
           description: Internal Server Error
 
@@ -272,37 +253,26 @@ paths:
       security:
         - Bearer: []
       tags:
-        - User Module
-      summary: Delete information in a transaction
-      description: API for deleting information in a transaction using transactionID
+        - Transactions Module
+      summary: Delete the note of a transaction
+      description: Api for delete informations of a transaction with its Id
       parameters:
-        - name: accountID
-          in: path
-          required: true
-          description: ID of the user's account
-          type: string
         - name: transactionID
           in: path
           required: true
           description: ID of the transaction
           type: string
-        - in: body
-          name: body
-          description: Information Payload
-          required: true
-          schema:
-            $ref: "#/definitions/Information"
       produces:
         - application/json
       responses:
         "200":
-          description: User bank account transaction information delete successfully
-        "400":
-          description: Bad request
+          description: Note successfully delete
         "401":
-          description: Unauthorized
+          description: User not connected
+        "403":
+          description: Invalid Token
         "404":
-          description: Not Found
+          description: TransactionID Not Found
         "500":
           description: Internal Server Error
 
@@ -362,56 +332,64 @@ definitions:
       userName:
         type: string
 
-  UserAccounts:
-    type: array
-    items:
-      type: object
-      properties:
-        id:
-          type: string
-        title:
-          type: string
-        amount:
-          type: string
-        description:
-          type: string
-    minItems: 3
-    maxItems: 3
+  TransactionsPeriod:
+    type: object
+    properties:
+      from:
+        type: string
+        format: date
+        description: start date (30days before)
+        example: "2024-01-01"
+      to:
+        type: string
+        format: date
+        description: end date (today)
+        example: "2024-02-01"
+
   Transaction:
     type: object
     properties:
-      id:
+      TransactionId:
         type: string
-      date:
+        description: transaction's id
+        example: "264351"
+      Date:
         type: string
-      description:
+        description: transaction's date
+        example: "27-02-2020"
+      Description:
         type: string
-      amount:
+        description: transaction's description
+        example: "Golden Sun Bakery"
+      Amount:
+        type: integer
+        description: transaction's amount
+        example: 8.00
+      Balance:
+        type: integer
+        description: transaction's balance
+        example: 298.00
+      Transaction type:
         type: string
-      balance:
+        description: transaction's type
+        example: "Electronic"
+      Category:
         type: string
-      transaction_type:
+        description: transaction's category
+        example: "Food"
+      Note:
         type: string
-      category:
-        type: string
-      note:
-        type: string
-      details:
-        type: string
-      information:
-        type: string
-  UserAccountTransactions:
+        description: transaction's note
+        example: "lorem ipsum"
+
+  ListOfTransactions:
     type: array
     items:
       $ref: "#/definitions/Transaction"
-    minItems: 1
-  Details:
-    properties:
-      category:
-        type: string
-        description: transaction details
-  Information:
+    minItems: 2
+
+  TransactionNote:
+    type: object
     properties:
       note:
         type: string
-        description: transaction information

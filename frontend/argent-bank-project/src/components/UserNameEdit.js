@@ -1,10 +1,11 @@
 import { React, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setUserName } from "../profileSlice";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { user } from "../routes";
 
 const UserNameEdit = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const userName = useSelector((state) => state.userName.userName);
@@ -28,13 +29,8 @@ const UserNameEdit = () => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(userNameObject),
-    }).then(function (response) {
-      response.json().then((userObject) => {
-        if (response.ok) {
-          alert("User name successfully change !");
-        }
-      });
     });
+    navigate(user);
   };
 
   return (

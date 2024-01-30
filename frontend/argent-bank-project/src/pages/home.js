@@ -7,7 +7,11 @@ import { signIn } from "../routes";
 const Home = () => {
   return (
     <div>
-      <Header navlinkTo={signIn} connexion="Sign in" />
+      <Header
+        navlinkTo={signIn}
+        connexion="Sign in"
+        logoSign="fa fa-user-circle"
+      />
       <Banner />
       <div className="features">
         <h2 className="sr-only">Features</h2>

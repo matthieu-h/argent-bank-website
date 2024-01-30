@@ -5,16 +5,25 @@ import { unSetToken } from "../slice";
 import Account from "../components/Account";
 import UserNameEdit from "../components/UserNameEdit";
 import { home } from "../routes";
+import { useSelector } from "react-redux";
 
 const UserEdit = () => {
   const dispatch = useDispatch();
+  const userName = useSelector((state) => state.userName.userName);
   const logout = (e) => {
     dispatch(unSetToken());
   };
-  console.log();
+
   return (
     <div>
-      <Header navlinkTo={home} connexion="Sign out" onclick={logout} />
+      <Header
+        navlinkTo={home}
+        connexion="Sign out"
+        onclick={logout}
+        userName={userName}
+        logoUser="fa fa-user-circle"
+        logoSign="fa fa-sign-out"
+      />
       <div className="main bg-dark">
         <div className="edit-user">
           <UserNameEdit />

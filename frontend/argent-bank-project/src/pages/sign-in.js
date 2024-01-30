@@ -6,7 +6,11 @@ import { signIn } from "../routes";
 const SignIn = () => {
   return (
     <div>
-      <Header navlinkTo={signIn} connexion="Sign in" />
+      <Header
+        navlinkTo={signIn}
+        connexion="Sign in"
+        logoSign="fa fa-user-circle"
+      />
       <SignInForm />
     </div>
   );

@@ -2,7 +2,14 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { home } from "../routes";
 
-const Header = ({ connexion, onclick, navlinkTo }) => {
+const Header = ({
+  connexion,
+  onclick,
+  navlinkTo,
+  userName,
+  logoSign,
+  logoUser,
+}) => {
   return (
     <div>
       <nav className="main-nav">
@@ -14,11 +21,17 @@ const Header = ({ connexion, onclick, navlinkTo }) => {
           />
           <h1 className="sr-only">Argent Bank</h1>
         </NavLink>
-        <div>
-          <NavLink to={navlinkTo} className="main-nav-item" onClick={onclick}>
-            <i className="fa fa-user-circle"></i>
-            {connexion}
-          </NavLink>{" "}
+        <div className="main-nav-user-sign">
+          <div className="main-nav-user">
+            <i className={logoUser}></i>
+            {userName}
+          </div>
+          <div>
+            <NavLink to={navlinkTo} className="main-nav-item" onClick={onclick}>
+              <i className={logoSign}></i>
+              {connexion}
+            </NavLink>{" "}
+          </div>
         </div>
       </nav>
     </div>

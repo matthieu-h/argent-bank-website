@@ -50,8 +50,18 @@ body {
   color: #2c3e50;
 }
 
+.main-nav-user-sign{
+  display:flex;
+  gap: 20px;
+}
+
 .main-nav a.router-link-exact-active {
   color: #42b983;
+}
+.main-nav-user{
+  font-weight: bold;
+  display: flex;
+  gap: 6px;
 }
 
 .main-nav-item {

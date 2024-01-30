@@ -13,6 +13,9 @@ const User = () => {
 
   const firstName = useSelector((state) => state.firstName.firstName);
   const lastName = useSelector((state) => state.lastName.lastName);
+  const userName = useSelector((state) => state.userName.userName);
+  console.log(firstName);
+  console.log(userName);
 
   const logout = (e) => {
     dispatch(unSetToken());
@@ -20,7 +23,14 @@ const User = () => {
 
   return (
     <div>
-      <Header navlinkTo={home} connexion="Sign out" onclick={logout} />
+      <Header
+        navlinkTo={home}
+        connexion="Sign out"
+        onclick={logout}
+        userName={userName}
+        logoUser="fa fa-user-circle"
+        logoSign="fa fa-sign-out"
+      />
       <div className="main bg-dark">
         <UserName firstName={firstName} lastName={lastName} />
         <h2 className="sr-only">Accounts</h2>
