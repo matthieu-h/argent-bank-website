@@ -276,6 +276,43 @@ paths:
         "500":
           description: Internal Server Error
 
+    # Chemin permettant de modifier la catégorie d'une transaction'
+  /transaction/{transactionID}/category:
+    put:
+      security:
+        - Bearer: []
+      tags:
+        - Transactions Module
+      summary: Update a category on a transaction
+      description: Update a category to a transaction with its Id
+      parameters:
+        - name: transactionID
+          in: path
+          required: true
+          description: ID of the transaction
+          type: string
+        - name: category
+          in: body
+          required: true
+          description: Update category of a transaction
+          schema:
+            $ref: "#/definitions/TransactionCategory"
+      produces:
+        - application/json
+      responses:
+        "201":
+          description: Category of transaction updated successfully
+        "400":
+          description: Invalid Fields of category
+        "401":
+          description: User not connected
+        "403":
+          description: Invalid Token
+        "404":
+          description: TransactionID Not Found
+        "500":
+          description: Internal Server Error
+
 securityDefinitions:
   Bearer:
     type: apiKey
@@ -392,4 +429,10 @@ definitions:
     type: object
     properties:
       note:
+        type: string
+
+  TransactionCategory:
+    type: object
+    properties:
+      category:
         type: string

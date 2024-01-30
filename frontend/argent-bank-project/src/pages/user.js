@@ -14,8 +14,6 @@ const User = () => {
   const firstName = useSelector((state) => state.firstName.firstName);
   const lastName = useSelector((state) => state.lastName.lastName);
   const userName = useSelector((state) => state.userName.userName);
-  console.log(firstName);
-  console.log(userName);
 
   const logout = (e) => {
     dispatch(unSetToken());
