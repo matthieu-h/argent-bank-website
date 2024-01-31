@@ -66,7 +66,7 @@ export function SignInForm() {
       <div className="sign-in-content">
         <i className="fa fa-user-circle sign-in-icon"></i>
         <h1>Sign In</h1>
-        <form className=".login-form" onSubmit={onSubmit}>
+        <form className=".login-form" onSubmit={onSubmit} name="login-form">
           <div className="input-wrapper">
             <p className="message" style={{ visibility: message }}>
               Incorrect email or password

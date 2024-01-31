@@ -70,7 +70,7 @@ body {
 }
 .main-nav-logo-image {
   max-width: 100%;
-  width: 200px;
+  width: 150px;
 }
 .hero {
   background-image: url('../../public/img/bank-tree.webp');
@@ -281,11 +281,13 @@ body {
   .account {
     flex-direction: row;
   }
-
+  .main-nav-logo-image {
+    max-width: 100%;
+    width: 200px;
+  }
   .account-content-wrapper.cta {
     flex: 0;
   }
-  
   .transaction-button {
     width: 200px;
   }

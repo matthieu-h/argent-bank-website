@@ -137,13 +137,10 @@ paths:
           description: User not connected
         "403":
           description: Invalid Token
-        "404":
-          description: List of Transaction Not Found
         "500":
           description: Internal Server Error
 
-    # Chemin permettant de visualiser les détails d'une transaction
-
+  # Chemin permettant de visualiser les détails d'une transaction
   /transactions/{transactionID}:
     get:
       security:
@@ -174,10 +171,9 @@ paths:
         "500":
           description: Internal Server Error
 
-    # Chemin permettant d'ajouter des informations sur une transaction'
-
+  # Chemin permettant d'ajouter des informations sur une transaction'
   /transaction/{transactionID}/note:
-    patch:
+    post:
       security:
         - Bearer: []
       tags:
@@ -199,8 +195,10 @@ paths:
       produces:
         - application/json
       responses:
-        "201":
-          description: Note in transaction added successfully
+        "200":
+          description: Note successfully added
+          schema:
+            $ref: "#/definitions/Transaction"
         "400":
           description: Invalid Fields of note
         "401":
@@ -235,8 +233,10 @@ paths:
       produces:
         - application/json
       responses:
-        "201":
-          description: Note successfully updated
+        "200":
+          description: Note successfully modified
+          schema:
+            $ref: "#/definitions/Transaction"
         "400":
           description: Invalid Fields of note
         "401":
@@ -265,8 +265,8 @@ paths:
       produces:
         - application/json
       responses:
-        "200":
-          description: Note successfully delete
+        "204":
+          description: Note successfully deleted
         "401":
           description: User not connected
         "403":
@@ -300,8 +300,10 @@ paths:
       produces:
         - application/json
       responses:
-        "201":
-          description: Category of transaction updated successfully
+        "200":
+          description: Category of transaction successfully updated
+          schema:
+            $ref: "#/definitions/Transaction"
         "400":
           description: Invalid Fields of category
         "401":
@@ -420,10 +422,18 @@ definitions:
         example: "lorem ipsum"
 
   ListOfTransactions:
-    type: array
-    items:
-      $ref: "#/definitions/Transaction"
-    minItems: 2
+    type: object
+    properties:
+      account-1:
+        type: array
+        items:
+          $ref: "#/definitions/Transaction"
+        minItems: 2
+      account-2:
+        type: array
+        items:
+          $ref: "#/definitions/Transaction"
+        minItems: 2
 
   TransactionNote:
     type: object

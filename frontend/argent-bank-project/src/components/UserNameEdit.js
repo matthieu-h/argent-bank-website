@@ -29,14 +29,13 @@ const UserNameEdit = () => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(userNameObject),
-    });
-    navigate(user);
+    }).then(navigate(user));
   };
 
   return (
     <div className="header">
       <h1>Edit user info</h1>
-      <form className="login-form" onSubmit={onSubmit}>
+      <form className="login-form" onSubmit={onSubmit} name="login-form">
         <div className="input-wrapper">
           <label htmlFor="username">Username</label>
           <input
