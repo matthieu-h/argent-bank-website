@@ -141,7 +141,7 @@ paths:
           description: Internal Server Error
 
   # Chemin permettant de visualiser les détails d'une transaction
-  /transactions/{transactionID}:
+  /transaction/{transactionID}:
     get:
       security:
         - Bearer: []
@@ -163,9 +163,7 @@ paths:
           schema:
             $ref: "#/definitions/Transaction"
         "401":
-          description: User not connected
-        "403":
-          description: Invalid Token
+          description: User not connected or Invalid Token
         "404":
           description: TransactionID Not Found
         "500":
@@ -195,16 +193,14 @@ paths:
       produces:
         - application/json
       responses:
-        "200":
+        "201":
           description: Note successfully added
           schema:
             $ref: "#/definitions/Transaction"
         "400":
           description: Invalid Fields of note
         "401":
-          description: User not connected
-        "403":
-          description: Invalid Token
+          description: User not connected or Invalid Token
         "404":
           description: TransactionID Not Found
         "500":
@@ -240,9 +236,7 @@ paths:
         "400":
           description: Invalid Fields of note
         "401":
-          description: User not connected
-        "403":
-          description: Invalid Token
+          description: User not connected or Invalid Token
         "404":
           description: TransactionID Not Found
         "500":
@@ -268,9 +262,7 @@ paths:
         "204":
           description: Note successfully deleted
         "401":
-          description: User not connected
-        "403":
-          description: Invalid Token
+          description: User not connected or Invalid Token
         "404":
           description: TransactionID Not Found
         "500":
@@ -307,9 +299,7 @@ paths:
         "400":
           description: Invalid Fields of category
         "401":
-          description: User not connected
-        "403":
-          description: Invalid Token
+          description: User not connected or Invalid Token
         "404":
           description: TransactionID Not Found
         "500":
